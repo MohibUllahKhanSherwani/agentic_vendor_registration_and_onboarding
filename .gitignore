@@ -1,3 +1,4 @@
 .env
-.venv
+venv
 VendorRegistrationAndOnboarding.egg-info
+.vscode/

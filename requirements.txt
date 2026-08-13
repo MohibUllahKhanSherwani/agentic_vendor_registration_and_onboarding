@@ -2,4 +2,8 @@ google-adk
 pydantic
 pydantic[email]
 PyYAML
+python-dotenv
+passlib
+passlib[bcrypt]
+bcrypt
 -e.
