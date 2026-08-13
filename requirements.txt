@@ -6,4 +6,7 @@ python-dotenv
 passlib
 passlib[bcrypt]
 bcrypt
+pymongo
+fastapi
+uvicorn
 -e.

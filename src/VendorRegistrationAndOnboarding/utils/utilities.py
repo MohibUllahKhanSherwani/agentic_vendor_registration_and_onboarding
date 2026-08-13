@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from passlib.context import CryptContext
 from logging.handlers import RotatingFileHandler
 import logging
+import secrets
 
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
@@ -21,6 +22,7 @@ def load_yaml(path: str | Path) -> dict:
         raise FileNotFoundError(f"YAML file not found: {path}")
     with path.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
+
     if data is None:
         raise ValueError(f"YAML file is empty: {path}")
     return data
@@ -77,3 +79,7 @@ async def ensure_session(user_id: str, session_id: str,session_service,app_name)
     else:
         logger.info(f"Session Already Exists")
     return session
+
+def generate_otp(length=6):
+    otp = ''.join(str(secrets.randbelow(10)) for _ in range(length))
+    return otp

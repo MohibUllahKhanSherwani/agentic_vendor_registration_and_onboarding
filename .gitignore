@@ -2,3 +2,5 @@
 venv
 VendorRegistrationAndOnboarding.egg-info
 .vscode/
+__pycache__/
+.pytest_cache/
