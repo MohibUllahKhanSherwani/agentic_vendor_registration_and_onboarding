@@ -9,4 +9,5 @@ bcrypt
 pymongo
 fastapi
 uvicorn
+argon2_cffi
 -e.
