@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from VendorRegistrationAndOnboarding.Controllers import UserController
+from VendorRegistrationAndOnboarding.Controllers import AuthController, UserController
 
 app = FastAPI()
 
@@ -16,4 +16,5 @@ app.add_middleware(
 def health():
     return {"status": "Service is ok"}
 
+app.include_router(AuthController.router, prefix="/auth", tags=["Authentication"])
 app.include_router(UserController.router, prefix="/users", tags=["Users"])

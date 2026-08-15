@@ -21,4 +21,8 @@ class UserRepository:
 
     async def get_user_by_email(self, email: str):
         results = self.collection.find_one({"Email": email, "IsDeleted": False})
-        return results        
+        return results      
+
+    async def get_all_users(self):
+        results = self.collection.find({"IsDeleted": False})
+        return list(results)
