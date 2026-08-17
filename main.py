@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from VendorRegistrationAndOnboarding.Controllers import AuthController, UserController
+from VendorRegistrationAndOnboarding.Controllers import AuthController, UserController, AdminController, VendorOnboardingController
 
 app = FastAPI()
 
@@ -18,3 +18,5 @@ def health():
 
 app.include_router(AuthController.router, prefix="/auth", tags=["Authentication"])
 app.include_router(UserController.router, prefix="/users", tags=["Users"])
+app.include_router(AdminController.router, prefix="/admin", tags=["Admin"])
+app.include_router(VendorOnboardingController.router, prefix="/onboarding", tags=["Vendor Onboarding"])
