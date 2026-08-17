@@ -26,3 +26,9 @@ class UserRepository:
     async def get_all_users(self):
         results = self.collection.find({"IsDeleted": False})
         return list(results)
+
+    async def get_users_by_type(self, user_type: str):
+        if user_type == "SuperAdmin":
+            return []
+        results = self.collection.find({"UserType": user_type, "IsDeleted": False})
+        return list(results)

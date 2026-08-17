@@ -15,7 +15,7 @@ class VendorOnboardingService:
             "VendorName": data.VendorName,
             "VendorEmail": data.VendorEmail.lower().strip(),
             "VendorPhone": data.VendorPhone,
-            "CreatedBy": created_by,
+            "CreatedBy": data.CreatedBy,
             "Status": "InvitationPending"
         }
 
@@ -29,3 +29,10 @@ class VendorOnboardingService:
                 "Status": "InvitationPending"
             }
         }
+
+    async def get_all_onboardings(self) -> list:
+        return await self.onboarding_repository.get_all_onboardings()
+
+    async def get_onboardings_by_created_by(self, created_by: str) -> list:
+        return await self.onboarding_repository.get_onboardings_by_created_by(created_by)
+

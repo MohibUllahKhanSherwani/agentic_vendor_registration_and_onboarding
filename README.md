@@ -100,8 +100,8 @@ VendorRegistration/
 │       │   ├── UserController.py                # User query routes (/users)
 │       │   └── VendorOnboardingController.py    # Onboarding routes (/vendor-onboarding)
 │       ├── Services/                            # Core business logic
-│       │   ├── AuthService.py                   # Auth & password verification logic
-│       │   ├── UserService.py                   # User management logic
+│       │   ├── AuthService.py                   # Auth, DeptOwner & Vendor creation logic
+│       │   ├── UserService.py                   # User query & retrieval operations
 │       │   └── VendorOnboardingService.py       # Onboarding workflow logic
 │       ├── Repositories/                        # MongoDB operations
 │       │   ├── UserRepository.py                # Users collection queries
@@ -172,9 +172,13 @@ VendorRegistration/
 | :--- | :--- | :--- | :--- | :--- |
 | `POST` | `/admin/create-department-owner` | `AdminController` | Creates a new Department Owner with generated Department UUID | SuperAdmin |
 | `POST` | `/vendor-onboarding/initiate-onboarding` | `VendorOnboardingController` | Initiates vendor onboarding request (`Status: InvitationPending`) | DepartmentOwner |
+| `GET` | `/vendor-onboarding/get-all-onboardings` | `VendorOnboardingController` | Fetches all active vendor onboarding requests | Admin / Internal |
+| `GET` | `/vendor-onboarding/created-by/{created_by}` | `VendorOnboardingController` | Fetches onboarding requests initiated by a specific Department Owner ID | DepartmentOwner / Admin |
 | `POST` | `/auth/signup` | `AuthController` | Self-registration endpoint for external Vendors | Vendor |
 | `POST` | `/auth/login` | `AuthController` | Authenticates users (SuperAdmin, DeptOwner, Vendor) | Public / All |
-| `GET` | `/users/get_all_users` | `UserController` | Fetches active users (`IsDeleted: false`) | Admin |
+| `GET` | `/users/get_all_users` | `UserController` | Fetches all non-SuperAdmin active users (`UserType != SuperAdmin`, `IsDeleted: false`) | Admin |
+| `GET` | `/users/department_owners` | `UserController` | Fetches all Department Owners | Admin / Internal |
+| `GET` | `/users/vendors` | `UserController` | Fetches all registered Vendor accounts | Admin / Internal |
 | `GET` | `/api/health` | `main.py` | Health check endpoint | Public |
 
 ---

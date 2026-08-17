@@ -20,3 +20,7 @@ class VendorOnboardingRepository:
 
     async def get_all_onboardings(self) -> list:
         return list(self.collection.find({"IsDeleted": False}))
+
+    async def get_onboardings_by_created_by(self, created_by: str) -> list:
+        return list(self.collection.find({"CreatedBy": created_by, "IsDeleted": False}))
+

@@ -6,6 +6,7 @@ class CreateVendorOnboardingRequest(BaseModel):
     VendorName: str
     VendorEmail: EmailStr
     VendorPhone: str
+    CreatedBy: Optional[str] = None
 
 class VendorOnboardingResponse(BaseModel):
     id: str
