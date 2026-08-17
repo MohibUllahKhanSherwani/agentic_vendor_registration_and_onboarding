@@ -7,7 +7,7 @@ class AuthService:
     def __init__(self):
         self.user_repository = UserRepository()
 
-    async def create_user(self, data: Register):
+    async def create_vendor(self, data: Register):
         user_id = str(uuid.uuid4())
         password = hash_password(data.Password)
         data.Email = data.Email.lower().strip()

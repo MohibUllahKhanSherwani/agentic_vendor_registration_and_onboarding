@@ -19,4 +19,4 @@ def health():
 app.include_router(AuthController.router, prefix="/auth", tags=["Authentication"])
 app.include_router(UserController.router, prefix="/users", tags=["Users"])
 app.include_router(AdminController.router, prefix="/admin", tags=["Admin"])
-app.include_router(VendorOnboardingController.router, prefix="/onboarding", tags=["Vendor Onboarding"])
+app.include_router(VendorOnboardingController.router, prefix="/vendor-onboarding", tags=["Vendor Onboarding"])

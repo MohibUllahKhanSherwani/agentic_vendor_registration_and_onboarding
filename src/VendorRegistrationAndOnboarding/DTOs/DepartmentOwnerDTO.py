@@ -7,5 +7,4 @@ class CreateDepartmentOwnerRequest(BaseModel):
     LastName: str
     Email: EmailStr
     Password: str
-    DepartmentId: str
     DepartmentName: Optional[str] = None

@@ -5,8 +5,6 @@ from VendorRegistrationAndOnboarding.DTOs.VendorOnboardingDTO import CreateVendo
 router = APIRouter()
 onboarding_service = VendorOnboardingService()
 
-
-@router.post("", tags=["Vendor Onboarding"])
-@router.post("/", tags=["Vendor Onboarding"])
+@router.post("/initiate-onboarding")
 async def create_onboarding(data: CreateVendorOnboardingRequest):
     return await onboarding_service.create_onboarding(data)

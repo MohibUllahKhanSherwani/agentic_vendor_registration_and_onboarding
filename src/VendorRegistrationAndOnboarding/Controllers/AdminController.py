@@ -5,7 +5,6 @@ from VendorRegistrationAndOnboarding.DTOs.DepartmentOwnerDTO import CreateDepart
 router = APIRouter()
 user_service = UserService()
 
-
-@router.post("/department-owners", tags=["Admin"])
+@router.post("/create-department-owner")
 async def create_department_owner(data: CreateDepartmentOwnerRequest):
     return await user_service.create_department_owner(data)

@@ -1,6 +1,6 @@
 import uuid
 from VendorRegistrationAndOnboarding.Repositories.VendorOnboardingRepository import VendorOnboardingRepository
-from VendorRegistrationAndOnboarding.DTOs.VendorOnboardingDTO import CreateVendorOnboardingRequest, OnboardingStatus
+from VendorRegistrationAndOnboarding.DTOs.VendorOnboardingDTO import CreateVendorOnboardingRequest
 
 
 class VendorOnboardingService:
@@ -12,12 +12,11 @@ class VendorOnboardingService:
 
         onboarding_data = {
             "_id": onboarding_id,
-            "PRNumber": data.PRNumber,
             "VendorName": data.VendorName,
             "VendorEmail": data.VendorEmail.lower().strip(),
             "VendorPhone": data.VendorPhone,
             "CreatedBy": created_by,
-            "Status": OnboardingStatus.INVITATION_PENDING.value
+            "Status": "InvitationPending"
         }
 
         created_id = await self.onboarding_repository.create_onboarding(onboarding_data)
@@ -27,6 +26,6 @@ class VendorOnboardingService:
             "message": "Vendor onboarding request created successfully.",
             "data": {
                 "_id": created_id,
-                "Status": OnboardingStatus.INVITATION_PENDING.value
+                "Status": "InvitationPending"
             }
         }

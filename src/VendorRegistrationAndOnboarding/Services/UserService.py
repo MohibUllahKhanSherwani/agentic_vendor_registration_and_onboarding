@@ -1,8 +1,8 @@
 import uuid
 from VendorRegistrationAndOnboarding.Repositories.UserRepository import UserRepository
 from VendorRegistrationAndOnboarding.DTOs.DepartmentOwnerDTO import CreateDepartmentOwnerRequest
-from VendorRegistrationAndOnboarding.DTOs.UserDTO import UserTypeEnum
 from VendorRegistrationAndOnboarding.utils.utilities import hash_password
+
 
 
 class UserService:
@@ -21,16 +21,17 @@ class UserService:
 
         user_id = str(uuid.uuid4())
         hashed_pwd = hash_password(data.Password)
+        dept_id = str(uuid.uuid4())
 
         user_data = {
             "_id": user_id,
             "Email": email,
             "FirstName": data.FirstName,
             "LastName": data.LastName,
-            "UserType": UserTypeEnum.DEPARTMENT_OWNER.value,
+            "UserType": "DepartmentOwner",
             "Password": hashed_pwd,
             "Department": {
-                "DepartmentId": data.DepartmentId,
+                "DepartmentId": dept_id,
                 "DepartmentName": data.DepartmentName
             }
         }
@@ -42,7 +43,7 @@ class UserService:
             "data": {
                 "UserId": created_id,
                 "Email": email,
-                "UserType": UserTypeEnum.DEPARTMENT_OWNER.value,
-                "DepartmentId": data.DepartmentId
+                "UserType": "DepartmentOwner",
+                "DepartmentId": dept_id
             }
-        }
+        }

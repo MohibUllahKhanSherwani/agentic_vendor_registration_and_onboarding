@@ -7,7 +7,7 @@ auth_service = AuthService()
 
 @router.post("/signup")
 async def signup(data: Register):
-    return await auth_service.create_user(data)
+    return await auth_service.create_vendor(data)
 
 @router.post("/login")
 async def login(data: Login):
