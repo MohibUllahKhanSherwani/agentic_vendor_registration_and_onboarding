@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from VendorRegistrationAndOnboarding.Services.AuthService import AuthService
-from VendorRegistrationAndOnboarding.DTOs.DepartmentOwnerDTO import CreateDepartmentOwnerRequest
+from VendorRegistrationAndOnboarding.DTOs.AuthDTO import CreateDepartmentOwnerRequest
 
 router = APIRouter()
 auth_service = AuthService()

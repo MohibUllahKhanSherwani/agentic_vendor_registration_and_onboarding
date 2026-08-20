@@ -5,3 +5,4 @@ VendorRegistrationAndOnboarding.egg-info
 __pycache__/
 .pytest_cache/
 app.log
+frontend/

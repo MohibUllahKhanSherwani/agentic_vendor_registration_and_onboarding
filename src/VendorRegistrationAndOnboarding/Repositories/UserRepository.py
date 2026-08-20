@@ -1,6 +1,5 @@
 from datetime import datetime
 from VendorRegistrationAndOnboarding.MongoHandler.Handler import db
-from VendorRegistrationAndOnboarding.DTOs.UserDTO import BaseUser
 
 class UserRepository:
     def __init__(self):

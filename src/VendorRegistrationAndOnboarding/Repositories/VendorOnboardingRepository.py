@@ -24,3 +24,11 @@ class VendorOnboardingRepository:
     async def get_onboardings_by_created_by(self, created_by: str) -> list:
         return list(self.collection.find({"CreatedBy": created_by, "IsDeleted": False}))
 
+    async def update_onboarding(self, onboarding_id: str, update_data: dict) -> bool:
+        update_data["UpdatedAt"] = datetime.utcnow()
+        result = self.collection.update_one(
+            {"_id": onboarding_id, "IsDeleted": False},
+            {"$set": update_data}
+        )
+        return result.modified_count
+
