@@ -20,6 +20,8 @@ class VendorOnboardingService:
             "VendorEmail": data.VendorEmail.lower().strip(),
             "VendorPhone": data.VendorPhone,
             "CreatedBy": data.CreatedBy,
+            "UrgencyLevel": data.UrgencyLevel,
+            "Comments": data.Comments,
             "Status": "InvitationPending",
             "OTP": otp,
             "OTPExpiry": otp_expiry,
