@@ -16,7 +16,9 @@ class VendorOnboardingService:
             "VendorEmail": data.VendorEmail.lower().strip(),
             "VendorPhone": data.VendorPhone,
             "CreatedBy": data.CreatedBy,
-            "Status": "InvitationSent"
+            "Status": "InvitationSent",
+            "UrgencyLevel": data.UrgencyLevel,
+            "Comments": data.Comments,
         }
 
         created_id = await self.onboarding_repository.create_onboarding(onboarding_data)

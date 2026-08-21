@@ -10,4 +10,5 @@ pymongo
 fastapi
 uvicorn
 argon2_cffi
+azure-communication-email
 -e.
