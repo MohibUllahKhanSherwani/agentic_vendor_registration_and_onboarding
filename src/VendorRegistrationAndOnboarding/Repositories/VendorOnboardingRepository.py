@@ -24,6 +24,28 @@ class VendorOnboardingRepository:
     async def get_onboardings_by_created_by(self, created_by: str) -> list:
         return list(self.collection.find({"CreatedBy": created_by, "IsDeleted": False}))
 
+    async def get_onboarding_by_email(self, email: str) -> dict:
+        return self.collection.find_one({"VendorEmail": email, "IsDeleted": False})
+
+    async def update_otp(self, email: str, otp: str, otp_expiry: datetime) -> bool:
+        result = self.collection.update_one(
+            {"VendorEmail": email, "IsDeleted": False},
+            {"$set": {
+                "OTP": otp,
+                "OTPExpiry": otp_expiry,
+                "IsEmailVerified": False,
+                "UpdatedAt": datetime.utcnow()
+            }}
+        )
+        return result.modified_count > 0
+
+    async def verify_email(self, email: str) -> bool:
+        result = self.collection.update_one(
+            {"VendorEmail": email, "IsDeleted": False},
+            {"$set": {"IsEmailVerified": True, "Status": "InProgress", "UpdatedAt": datetime.utcnow()}}
+        )
+        return result.modified_count > 0
+
     async def update_onboarding(self, onboarding_id: str, update_data: dict) -> bool:
         update_data["UpdatedAt"] = datetime.utcnow()
         result = self.collection.update_one(

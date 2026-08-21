@@ -26,3 +26,6 @@ class RootConfigs:
     
     class SessionConfig(BaseModel):
         max_messages: int
+
+    class EmailTemplates(BaseModel):
+        OTP: str

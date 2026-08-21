@@ -6,6 +6,8 @@ from passlib.context import CryptContext
 from logging.handlers import RotatingFileHandler
 import logging
 import secrets
+import smtplib
+from email.message import EmailMessage
 
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
@@ -83,3 +85,26 @@ async def ensure_session(user_id: str, session_id: str,session_service,app_name)
 def generate_otp(length=6):
     otp = ''.join(str(secrets.randbelow(10)) for _ in range(length))
     return otp
+
+def load_email_template(template_path: str) -> str:
+    path = Path(template_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Email template not found at: {path.resolve()}")
+    return path.read_text(encoding="utf-8")
+
+def send_otp_email(email: str, user_name: str, otp: str, expiry: str):
+    template_path = Path(__file__).resolve().parents[3] / "src" / "data" / "otp.html"
+    message = EmailMessage()
+    message["Subject"] = "Account Verification OTP"
+    message["From"] = os.getenv("GMAIL_EMAIL")
+    message["To"] = email
+    message.set_content(load_email_template(str(template_path)).format(
+        UserName=user_name,
+        Email=email,
+        OTP=otp,
+        OTPExpiryTime=expiry
+    ), subtype="html")
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(os.getenv("GMAIL_EMAIL"), os.getenv("GMAIL_PASSWORD"))
+        smtp.send_message(message)

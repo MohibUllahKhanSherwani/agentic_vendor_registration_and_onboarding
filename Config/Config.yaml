@@ -19,3 +19,6 @@ LLmConfig:
 
 SessionConfig:
   max_messages: 20
+
+EmailTemplates:
+  OTP: src/data/otp.html

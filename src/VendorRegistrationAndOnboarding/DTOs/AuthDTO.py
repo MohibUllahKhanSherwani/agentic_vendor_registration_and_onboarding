@@ -11,3 +11,7 @@ class CreateDepartmentOwnerRequest(BaseModel):
     Email: EmailStr
     Password: str
     DepartmentName: Optional[str] = None
+
+class VerifyOTPRequest(BaseModel):
+    Otp: str
+    Email: EmailStr
